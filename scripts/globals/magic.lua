@@ -542,7 +542,7 @@ end
 function calculateMagicHitRate(magicacc, magiceva, bonus, casterLvl, targetLvl)
     local p = 0;
     --add a scaling bonus or penalty based on difference of targets level from caster
-    local levelDiff = casterLvl - targetLvl;
+    local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5);
 
     -- mobs gradually get more resistant to magic
     local scale = 1 + targetLvl / 255;
@@ -1334,7 +1334,7 @@ function outputMagicHitRateInfo()
         printf("");
         printf("-------- CasterLvl: %d", casterLvl);
 
-        for lvlMod = -5, 10 do
+        for lvlMod = -5, 20 do
 
             local targetLvl = casterLvl + lvlMod;
 
@@ -1361,4 +1361,4 @@ function outputMagicHitRateInfo()
     end
 end;
 
-outputMagicHitRateInfo();
+-- outputMagicHitRateInfo();
